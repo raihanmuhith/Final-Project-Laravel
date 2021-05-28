@@ -15,7 +15,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function(){
         return view('layout.master');
     });
-    
+    Route::resource('/profile','ProfileController');
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
