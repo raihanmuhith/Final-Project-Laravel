@@ -43,6 +43,7 @@ class BeritaController extends Controller
     {
         $beritas = DB::table('beritas')->where('id', $id)->first();
         $tags = DB::table('tags')->where('berita_id',$id)->get();
+        return view('beritas.show', compact('beritas','tags'));
     }
 
     
