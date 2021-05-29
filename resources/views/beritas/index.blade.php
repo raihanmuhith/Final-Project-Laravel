@@ -1,7 +1,16 @@
 @extends('layout.master')
 
+@section('title')
+    Berita
+@endsection
+
 @section('content')
 <a href="/beritas/create" class="btn btn-primary my-3">Tambah</a>
+<a href="/beritas/export">
+<button type="button" class="btn btn-success ml-2">
+    <i class="fa fa-download"></i>
+</button>
+</a>
 <table class="table">
     <thead class="thead-light">
     <tr>
@@ -25,7 +34,7 @@
                     <a href="/beritas/{{$value->id}}/edit" class="btn btn-primary">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <input type="submit" class="btn btn-danger my-1" value="Delete">
+                        <input type="submit" class="btn btn-danger my-1 delete-confirm" value="Delete">
                     </form>
                 </td>
             </tr>
@@ -36,15 +45,10 @@
         @endforelse              
     </tbody>
 </table>
+    @push('script')
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{{ asset('js/myjs.js') }}"></script>
+    @endpush
 @endsection
 
-@push('script')
-<script>
-    Swal.fire({
-        title: "Berhasil!",
-        text: "Memasangkan script sweet alert",
-        icon: "success",
-        confirmButtonText: "Cool",
-    });
-</script>
-@endpush
+
