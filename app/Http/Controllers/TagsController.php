@@ -3,71 +3,82 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Tag;
+use Auth;
 
 class TagsController extends Controller
 {
+    public function index()
+    {
+        //$tags = Tag::where('berita_id', beritas::id);
+        $tags = Tag::find($id);
+        return view('tags.index', compact('tags'));
+    }
+
     public function create()
     {
-        return view('beritas.create');
+        return view('tags.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|unique:beritas',
-            'content' => 'required',
-            'penulis' => 'required'
+            'nama' => 'required|unique:tags',
+            'berita_id' => 'required'
         ]);
-        $query = DB::table('beritas')->insert([
-            "judul" => $request["judul"],
-            "content" => $request["content"],
-            "penulis" => $request["penulis"]
+        // $query = DB::table('tags')->insert([
+        //     "nama" => $request["nama"],
+        //     "beritas_id" => $request["beritas_id"]
+        // ]);
+        $tags = Tag::create([
+            'nama' => $request['nama'],
+            'berita_id' => Auth::id()
         ]);
-        return redirect('/beritas');
+        return redirect('/tags')->with('success', 'Tag Berhasil Disimpan');
 
     }
-
-    public function index()
-    {
-        $beritas = DB::table('beritas')->get();
-        return view('beritas.index', compact('beritas'));
-    }
-
     
     public function show($id)
     {
-        $beritas = DB::table('beritas')->where('id', $id)->first();
-        return view('beritas.show', compact('beritas', 'tags'));
+        //$tags = DB::table('tags')->where('id', $id)->first();
+        $tags = Tag::find($id);
+        dd($tags->berita);
+        return view('tags.show', compact('tags'));
     }
 
     
     public function edit($id)
     {
-        $beritas = DB::table('beritas')->where('id', $id)->first();
-        return view('beritas.edit', compact('beritas'));
+        //$tags = DB::table('tags')->where('id', $id)->first();
+        $tags = Tag::find($id);
+        return view('tags.edit', compact('tags'));
     }
 
     public function update($id, Request $request)
     {
-        $request->validate([
-            'judul' => 'required|unique:beritas',
-            'content' => 'required',
-            'penulis' => 'required'
-        ]);
+        // $request->validate([
+        //     'nama' => 'required|unique:tags',
+        //     'beritas_id' => 'required'
+        // ]);
 
-        $query = DB::table('beritas')
-            ->where('id', $id)
-            ->update([
-                "judul" => $request["judul"],
-                "content" => $request["content"],
-                "penulis" => $request["penulis"]
-            ]);
-        return redirect('/beritas');
+        // $query = DB::table('tags')
+        //     ->where('id', $id)
+        //     ->update([
+        //         "nama" => $request["nama"],
+        //         "beritas_id" => $request["beritas_id"]
+        //     ]);
+        $update = Tag::where('id', $id)->update([
+            'nama' => $request['nama'],
+            'berita_id' => Auth::id()
+        ]);
+        return redirect('/tags');
     }
 
     public function destroy($id)
     {
-        $query = DB::table('beritas')->where('id', $id)->delete();
-        return redirect('/beritas')->with('success', 'Data sukses dihapus');
+        //$query = DB::table('tags')->where('id', $id)->delete();
+        Tag::destroy($id);
+        return redirect('/tags')->with('success', 'Data sukses dihapus');
     }
 }

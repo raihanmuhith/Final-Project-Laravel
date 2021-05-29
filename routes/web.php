@@ -27,6 +27,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/beritas/{beritas_id}/edit', 'BeritaController@edit');
     Route::put('/beritas/{beritas_id}', 'BeritaController@update');
     Route::delete('/beritas/{beritas_id}', 'BeritaController@destroy');
+
+    //tags
+    Route::get('/tags', 'TagsController@index');
+    Route::get('/tags/create', 'TagsController@create');
+    Route::post('/tags', 'TagsController@store');
+    Route::get('/tags/{tags_id}', 'TagsController@show');
+    Route::get('/tags/{tags_id}/edit', 'TagsController@edit');
+    Route::put('/tags/{tags_id}', 'TagsController@update');
+    Route::delete('/tags/{tags_id}', 'TagsController@destroy');
     
 });
 

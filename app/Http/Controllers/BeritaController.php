@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Exports\BeritasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Berita;
+use App\Tag;
 use DB;
 use PDF;
 
@@ -43,6 +44,7 @@ class BeritaController extends Controller
     {
         $beritas = DB::table('beritas')->where('id', $id)->first();
         $tags = DB::table('tags')->where('berita_id',$id)->get();
+        $tags = Tag::find($id);
         return view('beritas.show', compact('beritas','tags'));
     }
 
