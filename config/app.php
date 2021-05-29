@@ -178,6 +178,9 @@ return [
         //Laravel Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        //DOMPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -229,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class, //Laravel Auth
+        'PDF' => Barryvdh\DomPDF\Facade::class, //DOMPDF
     ],
 
 ];

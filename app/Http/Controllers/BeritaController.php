@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\BeritasExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Berita;
 use DB;
+use PDF;
 
 class BeritaController extends Controller
 {
@@ -38,7 +42,7 @@ class BeritaController extends Controller
     public function show($id)
     {
         $beritas = DB::table('beritas')->where('id', $id)->first();
-        return view('beritas.show', compact('beritas', 'tags'));
+        $tags = DB::table('tags')->where('berita_id',$id)->get();
     }
 
     
@@ -64,5 +68,22 @@ class BeritaController extends Controller
                 "penulis" => $request["penulis"]
             ]);
         return redirect('/beritas');
+    }
+
+    public function destroy($berita_id){
+
+        Berita::find($berita_id)->delete();
+        return redirect('/beritas')->with('success','Data Berita Berhasil di hapus');
+    }
+
+    public function export(){
+        return Excel::download(new BeritasExport, 'BeritaTable.xlsx');
+    }
+
+    public function pdf($berita_id){
+        $berita = Berita::find($berita_id);
+        $tags = DB::table('tags')->where('berita_id',$berita_id)->get();
+        $pdf = PDF::loadView('pdf.detail', compact('berita','tags'));
+        return $pdf->download('detail_berita_' . $berita['id'] . '.pdf');
     }
 }
