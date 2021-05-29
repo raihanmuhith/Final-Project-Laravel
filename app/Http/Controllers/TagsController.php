@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 
-class BeritaController extends Controller
+class TagsController extends Controller
 {
     public function create()
     {
@@ -64,5 +63,11 @@ class BeritaController extends Controller
                 "penulis" => $request["penulis"]
             ]);
         return redirect('/beritas');
+    }
+
+    public function destroy($id)
+    {
+        $query = DB::table('beritas')->where('id', $id)->delete();
+        return redirect('/beritas')->with('success', 'Data sukses dihapus');
     }
 }
