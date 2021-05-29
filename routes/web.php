@@ -19,8 +19,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
-
-
 Auth::routes();
 
-
+//berita
+Route::get('/beritas', 'BeritaController@index');
+Route::get('/beritas/create', 'BeritaController@create');
+Route::post('/beritas', 'BeritaController@store');
+Route::get('/beritas/{beritas_id}', 'BeritaController@show');
+Route::get('/beritas/{beritas_id}/edit', 'BeritaController@edit');
+Route::put('/beritas/{beritas_id}', 'BeritaController@update');
+Route::delete('/beritas/{beritas_id}', 'BeritaController@destroy');
