@@ -38,6 +38,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/comments/{comment_id}/edit', 'CommentController@edit');
     Route::put('/comments/{comment_id}', 'CommentController@update');
     Route::delete('/comments/{comment_id}', 'CommentController@destroy');
+    
+    //tags
+    Route::get('/tags', 'TagsController@index');
+    Route::get('/tags/create', 'TagsController@create');
+    Route::post('/tags', 'TagsController@store');
+    Route::get('/tags/{tags_id}', 'TagsController@show');
+    Route::get('/tags/{tags_id}/edit', 'TagsController@edit');
+    Route::put('/tags/{tags_id}', 'TagsController@update');
+    Route::delete('/tags/{tags_id}', 'TagsController@destroy');
+    
 });
 
 Auth::routes();

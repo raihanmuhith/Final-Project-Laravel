@@ -25,6 +25,7 @@
     <textarea name="comment" id="comment" cols="130" rows="2" placeholder="Comment here.."></textarea>
     <button type="submit" class="btn btn-sm btn-secondary mb-4">post</button>
 </form>
+<p>tags: </p>
 
 <a href="/beritas" class="btn btn-primary mt-4">Kembali</a>
 <a href="/pdf-detail/{{$beritas->id}}" class="btn btn-success mt-4 ml-2"><i class="fa fa-download"></i></a>
