@@ -9,6 +9,7 @@ use App\Berita;
 use App\Tag;
 use DB;
 use PDF;
+use App\Comment;
 
 class BeritaController extends Controller
 {
@@ -43,9 +44,9 @@ class BeritaController extends Controller
     public function show($id)
     {
         $beritas = DB::table('beritas')->where('id', $id)->first();
-        //$tags = DB::table('tags')->where('berita_id',$id)->get();
         $tags = Tag::where('berita_id', $id)->get();
-        return view('beritas.show', compact('beritas','tags'));
+        $comment = Comment::where('berita_id',$id)->get();
+        return view('beritas.show', compact('beritas','tags','comment'));
     }
 
     
@@ -58,7 +59,7 @@ class BeritaController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([
-            'judul' => 'required|unique:beritas',
+            'judul' => 'required',
             'content' => 'required',
             'penulis' => 'required'
         ]);
@@ -89,4 +90,5 @@ class BeritaController extends Controller
         $pdf = PDF::loadView('pdf.detail', compact('berita','tags'));
         return $pdf->download('detail_berita_' . $berita['id'] . '.pdf');
     }
+
 }
