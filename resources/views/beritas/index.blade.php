@@ -18,7 +18,7 @@
         <th scope="col">Judul</th>
         <th scope="col">Content</th>
         <th scope="col">Penulis</th>
-        <th scope="col">Actions</th>
+        <th class="text-center" scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
