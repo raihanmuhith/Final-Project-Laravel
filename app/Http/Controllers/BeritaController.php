@@ -79,8 +79,11 @@ class BeritaController extends Controller
 
     public function destroy($berita_id){
 
-        Berita::find($berita_id)->delete();
-        Alert::success('Success!!', 'Success Menghapus Data');
+        // Berita::find($berita_id)->delete();
+        DB::table('tags')->where('berita_id', $berita_id)->delete();
+        DB::table('comments')->where('berita_id', $berita_id)->delete();
+        DB::table('beritas')->where('id', $berita_id)->delete();
+        // Alert::success('Success!!', 'Success Menghapus Data');
         return redirect('/beritas')->with('success','Data Berita Berhasil di hapus');
     }
 
