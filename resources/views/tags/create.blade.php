@@ -14,13 +14,12 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="body">Id Berita</label>
-            <input type="text" class="form-control" name="berita_id" id="berita_id" placeholder="Masukkan Id Berita">
-            @error('berita_id')
-                <div class="alert alert-danger">
-                    {{ $message }}
-                </div>
-            @enderror
+            <label for="body">Nama Berita</label>
+            <select name="berita_id" id="berita_id">
+                @foreach ($beritas as $br) 
+                    <option value="{{$br->id}}">{{$br->judul}}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Tambah</button>
     </form>

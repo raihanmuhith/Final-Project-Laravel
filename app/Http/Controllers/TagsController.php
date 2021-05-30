@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Tag;
+use App\Berita;
 use Auth;
 
 class TagsController extends Controller
@@ -12,13 +13,15 @@ class TagsController extends Controller
     public function index()
     {
         //$tags = Tag::where('berita_id', beritas::id);
-        $tags = Tag::find($id);
+        
+        $tags = Tag::get();
         return view('tags.index', compact('tags'));
     }
 
     public function create()
     {
-        return view('tags.create');
+        $beritas = Berita::get();
+        return view('tags.create', compact('beritas'));
     }
 
     public function store(Request $request)
@@ -42,8 +45,8 @@ class TagsController extends Controller
     public function show($id)
     {
         //$tags = DB::table('tags')->where('id', $id)->first();
-        $tags = Tag::find($id);
-        dd($tags->berita);
+        $tags = Tag::find($id)->first();
+        //dd($tags->berita);
         return view('tags.show', compact('tags'));
     }
 
@@ -52,7 +55,8 @@ class TagsController extends Controller
     {
         //$tags = DB::table('tags')->where('id', $id)->first();
         $tags = Tag::find($id);
-        return view('tags.edit', compact('tags'));
+        $beritas = Berita::get();
+        return view('tags.edit', compact('tags', 'beritas'));
     }
 
     public function update($id, Request $request)
@@ -70,7 +74,7 @@ class TagsController extends Controller
         //     ]);
         $update = Tag::where('id', $id)->update([
             'nama' => $request['nama'],
-            'berita_id' => Auth::id()
+            'berita_id' => $request['berita_id']
         ]);
         return redirect('/tags');
     }

@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/beritas/export', 'BeritaController@export');
     Route::get('/pdf-detail/{berita_id}','BeritaController@pdf');
+    
     //berita
     Route::get('/beritas', 'BeritaController@index');
     Route::get('/beritas/create', 'BeritaController@create');

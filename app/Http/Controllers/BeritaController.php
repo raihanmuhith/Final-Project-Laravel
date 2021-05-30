@@ -43,8 +43,8 @@ class BeritaController extends Controller
     public function show($id)
     {
         $beritas = DB::table('beritas')->where('id', $id)->first();
-        $tags = DB::table('tags')->where('berita_id',$id)->get();
-        $tags = Tag::find($id);
+        //$tags = DB::table('tags')->where('berita_id',$id)->get();
+        $tags = Tag::where('berita_id', $id)->get();
         return view('beritas.show', compact('beritas','tags'));
     }
 

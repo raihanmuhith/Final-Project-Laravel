@@ -6,10 +6,11 @@
 
 @section('content')
 <a href="/tags/create" class="btn btn-primary my-3">Tambah</a>
-<a href="/tags/export">
-<button type="button" class="btn btn-success ml-2">
-    <i class="fa fa-download"></i>
-</button>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 </a>
 <table class="table">
     <thead class="thead-light">
@@ -32,7 +33,7 @@
                     <a href="/tags/{{$value->id}}/edit" class="btn btn-primary">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <input type="submit" class="btn btn-danger my-1 delete-confirm" value="Delete">
+                        <input type="submit" class="btn btn-danger my-1" value="Delete">
                     </form>
                 </td>
             </tr>
