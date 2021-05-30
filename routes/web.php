@@ -12,9 +12,7 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function(){
-        return view('layout.master');
-    });
+    Route::get('/','BeritaController@index');
     //profile
     Route::resource('/profile','ProfileController');
 
@@ -39,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/comments/{comment_id}/edit', 'CommentController@edit');
     Route::put('/comments/{comment_id}', 'CommentController@update');
     Route::delete('/comments/{comment_id}', 'CommentController@destroy');
-    
+
     //tags
     Route::get('/tags', 'TagsController@index');
     Route::get('/tags/create', 'TagsController@create');
