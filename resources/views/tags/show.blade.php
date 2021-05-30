@@ -6,5 +6,4 @@
 <p>berita: {{$tags->berita->content}}</p>
 
 <a href="/tags" class="btn btn-primary mt-4">Kembali</a>
-<a href="/pdf-detail/{{$tags->id}}" class="btn btn-success mt-4 ml-2"><i class="fa fa-download"></i></a>
 @endsection

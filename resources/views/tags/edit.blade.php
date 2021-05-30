@@ -7,7 +7,7 @@
         @method('PUT')
         <div class="form-group">
             <label for="title">Nama Tag</label>
-            <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Tag">
+            <input type="text" class="form-control" name="nama" value="{{ old('nama',$tags->nama) }}" id="nama" placeholder="Masukkan Nama Tag">
             @error('nama')
                 <div class="alert alert-danger">
                     {{ $message }}
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="body">Nama Berita</label>
-            <select name="berita_id" id="berita_id">
+            <select placeholder="{{ old('nama',$tags->berita->judul) }}" name="berita_id" id="berita_id">
                 @foreach ($beritas as $br) 
                     <option value="{{$br->id}}">{{$br->judul}}</option>
                 @endforeach

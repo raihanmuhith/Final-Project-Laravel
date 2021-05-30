@@ -27,16 +27,13 @@ class TagsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|unique:tags',
+            'nama' => 'required',
             'berita_id' => 'required'
         ]);
-        // $query = DB::table('tags')->insert([
-        //     "nama" => $request["nama"],
-        //     "beritas_id" => $request["beritas_id"]
-        // ]);
+
         $tags = Tag::create([
             'nama' => $request['nama'],
-            'berita_id' => Auth::id()
+            'berita_id' => $request['berita_id']
         ]);
         return redirect('/tags')->with('success', 'Tag Berhasil Disimpan');
 
@@ -44,16 +41,14 @@ class TagsController extends Controller
     
     public function show($id)
     {
-        //$tags = DB::table('tags')->where('id', $id)->first();
-        $tags = Tag::find($id)->first();
-        //dd($tags->berita);
+        $tags = Tag::find($id);
         return view('tags.show', compact('tags'));
     }
 
     
     public function edit($id)
     {
-        //$tags = DB::table('tags')->where('id', $id)->first();
+
         $tags = Tag::find($id);
         $beritas = Berita::get();
         return view('tags.edit', compact('tags', 'beritas'));
@@ -61,17 +56,7 @@ class TagsController extends Controller
 
     public function update($id, Request $request)
     {
-        // $request->validate([
-        //     'nama' => 'required|unique:tags',
-        //     'beritas_id' => 'required'
-        // ]);
-
-        // $query = DB::table('tags')
-        //     ->where('id', $id)
-        //     ->update([
-        //         "nama" => $request["nama"],
-        //         "beritas_id" => $request["beritas_id"]
-        //     ]);
+        
         $update = Tag::where('id', $id)->update([
             'nama' => $request['nama'],
             'berita_id' => $request['berita_id']
@@ -81,7 +66,6 @@ class TagsController extends Controller
 
     public function destroy($id)
     {
-        //$query = DB::table('tags')->where('id', $id)->delete();
         Tag::destroy($id);
         return redirect('/tags')->with('success', 'Data sukses dihapus');
     }
