@@ -11,10 +11,10 @@ FORUM BERITA
 
 ## ERD
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/ERD.png" width="400"></a></p>
+<p align="center"><img src="public/images/ERD.png" width="400"></p>
 
 ## Link video
 
-Link Demo Aplikasi : 
+Link Demo Aplikasi : https://drive.google.com/file/d/1VIm3KK6FnP6PfLK_Vp7vz49v8shJgA79/view?usp=sharing
 
 
